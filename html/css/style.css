@@ -21,7 +21,7 @@ body {
 }
 
 .header-inner {
-  max-width: 1300px;
+  max-width: 1450px;
   margin: 0 auto;
   padding: 0.75rem 0;
   display: flex;
@@ -127,7 +127,7 @@ body {
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
   padding: 1.25rem;
   display: grid;
-  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
   gap: 0.25rem 2rem;
   opacity: 0;
   visibility: hidden;
@@ -2136,7 +2136,11 @@ body {
 .pricing-promo-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(20, 5, 8, 0.85), rgba(204, 30, 44, 0.75));
+  background: linear-gradient(
+    135deg,
+    rgba(20, 5, 8, 0.85),
+    rgba(204, 30, 44, 0.75)
+  );
 }
 
 .pricing-promo-inner {
