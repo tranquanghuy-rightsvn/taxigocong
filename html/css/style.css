@@ -2404,6 +2404,16 @@ body {
     align-items: flex-start;
   }
 
+  .footer-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .footer-info-text {
+    white-space: normal;
+  }
+
   .footer-tagline {
     align-items: flex-start;
     margin-left: 0;
