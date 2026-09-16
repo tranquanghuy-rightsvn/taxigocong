@@ -34,6 +34,32 @@
     />
     <meta name="twitter:image" content="assets/images/og-image.jpg" />
 
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="/assets/favicon/favicon-48x48.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/favicon/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/style.css" />
   </head>
@@ -296,9 +322,11 @@
               </span>
               <input
                 type="text"
-                class="qb-input"
+                class="qb-input place-autocomplete-input"
                 placeholder="Nhập địa chỉ đón"
+                autocomplete="off"
               />
+              <ul class="address-suggestions" hidden></ul>
             </div>
 
             <span class="qb-divider"></span>
@@ -320,9 +348,11 @@
               </span>
               <input
                 type="text"
-                class="qb-input"
+                class="qb-input place-autocomplete-input"
                 placeholder="Nhập địa chỉ đến"
+                autocomplete="off"
               />
+              <ul class="address-suggestions" hidden></ul>
             </div>
 
             <span class="qb-divider"></span>
@@ -343,9 +373,9 @@
                 Thời gian
               </span>
               <input
-                type="text"
-                class="qb-input"
-                placeholder="Chọn thời gian"
+                type="datetime-local"
+                class="qb-input qb-datetime-input"
+                id="qbDateTime"
               />
             </div>
           </div>
@@ -1172,7 +1202,7 @@
               <h2 class="section-title">DỊCH VỤ CỦA TAXI GÒ CÔNG</h2>
               <span class="section-title-bar"></span>
             </div>
-            <a href="#" class="section-link">
+            <a href="/dich-vu" class="section-link">
               Xem tất cả dịch vụ
               <svg
                 viewBox="0 0 24 24"
@@ -1191,7 +1221,7 @@
           </div>
 
           <div class="services-grid">
-            <a href="#" class="service-card">
+            <a href="/dich-vu/taxi-noi-thanh-go-cong" class="service-card">
               <span class="service-img service-img-brand">
                 <img
                   src="/assets/images/car.png"
@@ -1221,7 +1251,10 @@
               </span>
             </a>
 
-            <a href="#" class="service-card">
+            <a
+              href="/dich-vu/taxi-lien-tinh-tien-giang-dong-thap"
+              class="service-card"
+            >
               <!-- Photo: "Wide view over the northern Transfagarasan" by Horia Varlan, CC BY 2.0 -->
               <span class="service-img">
                 <img
@@ -1252,7 +1285,10 @@
               </span>
             </a>
 
-            <a href="#" class="service-card">
+            <a
+              href="/dich-vu/dua-don-san-bay-tan-son-nhat"
+              class="service-card"
+            >
               <!-- Photo: "Erbil International Airport terminal building" by Jeffrey Beall, CC BY 3.0 -->
               <span class="service-img">
                 <img
@@ -1283,7 +1319,7 @@
               </span>
             </a>
 
-            <a href="#" class="service-card">
+            <a href="/dich-vu/xe-du-lich-tham-quan" class="service-card">
               <!-- Photo: "Ninh Binh, Vietnam" by Nguyen Duc Loi, CC BY 2.0 -->
               <span class="service-img">
                 <img
@@ -1314,7 +1350,7 @@
               </span>
             </a>
 
-            <a href="#" class="service-card">
+            <a href="/dich-vu/xe-hop-dong-su-kien" class="service-card">
               <!-- Photo: "Handshake - 2 men" by flazingo_photos, CC BY-SA 2.0 -->
               <span class="service-img">
                 <img
@@ -1925,61 +1961,6 @@
             </div>
           </div>
 
-          <div class="footer-social">
-            <a href="#" class="social-icon social-fb" aria-label="Facebook">
-              <svg
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  d="M22 12a10 10 0 1 0-11.5 9.95v-7.04H7.9V12h2.6V9.8c0-2.57 1.53-4 3.87-4 1.12 0 2.3.2 2.3.2v2.5h-1.3c-1.28 0-1.68.8-1.68 1.62V12h2.86l-.46 2.91h-2.4v7.04A10 10 0 0 0 22 12z"
-                />
-              </svg>
-            </a>
-            <a href="#" class="social-icon social-zalo" aria-label="Zalo">
-              <svg
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  d="M12 3C6.48 3 2 6.94 2 11.5c0 2.42 1.28 4.6 3.36 6.1L4 21l3.94-1.58A11.4 11.4 0 0 0 12 20c5.52 0 10-3.94 10-8.5S17.52 3 12 3z"
-                />
-              </svg>
-            </a>
-            <a href="#" class="social-icon social-yt" aria-label="YouTube">
-              <svg
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.3 3.5-6.3 3.5z"
-                />
-              </svg>
-            </a>
-            <a href="#" class="social-icon social-tiktok" aria-label="TikTok">
-              <svg
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  d="M16.5 3c.3 2 1.7 3.6 3.7 4v3c-1.4 0-2.7-.4-3.8-1.2v6.7a5.9 5.9 0 1 1-5-5.8v3.1a2.8 2.8 0 1 0 2 2.7V3h3.1z"
-                />
-              </svg>
-            </a>
-          </div>
-
           <div class="footer-tagline">
             <span class="footer-tagline-line1">An toàn</span>
             <span class="footer-tagline-line2">Trên mọi nẻo đường!</span>
@@ -2004,6 +1985,7 @@
       </div>
     </footer>
 
+    <script src="/js/address-autocomplete.js"></script>
     <script src="/js/main.js"></script>
   </body>
 </html>

@@ -103,6 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  const qbDateTime = document.getElementById('qbDateTime');
+  if (qbDateTime) {
+    const pad = (n) => String(n).padStart(2, '0');
+    const now = new Date();
+    const localNow = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
+    qbDateTime.min = localNow;
+  }
+
   const contactForm = document.querySelector('.contact-form');
 
   if (contactForm) {
