@@ -386,7 +386,7 @@ body {
   position: relative;
   width: 100%;
   aspect-ratio: 3532 / 1184;
-  background-image: url("../assets/images/bg-banner.png");
+  background-image: url("../assets/images/bg-banner.webp");
   background-size: cover;
   background-position: center;
   overflow: hidden;
