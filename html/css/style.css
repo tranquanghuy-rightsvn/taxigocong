@@ -748,22 +748,6 @@ body {
   background: #a5121e;
 }
 
-.qb-phone {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: var(--color-dark);
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 0.85rem;
-  white-space: nowrap;
-}
-
-.qb-phone svg {
-  color: var(--color-primary);
-  flex-shrink: 0;
-}
-
 /* Tablet gap (769-1273px): mobile menu is active here too (see 1273px query
    above) but the phone/desktop hero + quick-booking sizing below breaks at
    this width — fix just this band without touching mobile (<=768px) or
@@ -818,7 +802,7 @@ body {
 
   .qb-action {
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
   }
 }
 
@@ -925,7 +909,7 @@ body {
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
   }
 }
 
@@ -937,10 +921,6 @@ body {
   }
 
   .qb-cta {
-    justify-content: center;
-  }
-
-  .qb-phone {
     justify-content: center;
   }
 }
