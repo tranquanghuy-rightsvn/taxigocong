@@ -92,16 +92,6 @@
     </image:image>
   </url>
   <url>
-    <loc>https://taxigocongdongthap.com/blog/test/</loc>
-    <lastmod>2026-09-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://taxigocongdongthap.com/assets/images/blog/test-cover.jpg</image:loc>
-      <image:title>test</image:title>
-    </image:image>
-  </url>
-  <url>
     <loc>https://taxigocongdongthap.com/dich-vu/</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
