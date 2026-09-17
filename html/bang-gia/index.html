@@ -4,6 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Google tag (gtag.js) — mọi trang trừ admin/index.html (SEO_EXCLUDED), xem
+         check_coverage(). Bài viết CMS mới cũng có vì render_head() chạy lại cho
+         từng bài trong ALL_POSTS mỗi lần build. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VBRBP2X4L"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7VBRBP2X4L');
+    </script>
+
     <!-- Primary meta -->
     <title>Bảng Giá Taxi Gò Công 2026 - Giá Cước Niêm Yết Minh Bạch</title>
     <meta name="description" content="Bảng giá Taxi Gò Công: nội thành từ 45.000đ, liên tỉnh Tiền Giang - Đồng Tháp, sân bay Tân Sơn Nhất, Cần Thơ. Giá niêm yết rõ ràng, không phát sinh." />
