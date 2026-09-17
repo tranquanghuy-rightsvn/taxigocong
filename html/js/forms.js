@@ -28,6 +28,12 @@
     '<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" ' +
     'stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
     '<path d="M12 8v5M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg>';
+  // Nửa vòng cung để quay liên tục (.btn-spinner trong style.css) — báo cho khách biết yêu
+  // cầu đang được gửi, tránh cảm giác web bị đơ trong lúc chờ backend trả lời.
+  var ICON_SPINNER =
+    '<svg class="btn-spinner" viewBox="0 0 24 24" width="16" height="16" fill="none" ' +
+    'stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">' +
+    '<path d="M12 3a9 9 0 1 0 9 9"/></svg>';
 
   var overlay = null;
   var lastFocused = null;
@@ -97,6 +103,28 @@
     return el ? String(el.value || '').trim() : '';
   }
 
+  /**
+   * Bật/tắt trạng thái "đang gửi" trên nút submit: đổi nội dung sang spinner quay + chữ
+   * "Đang gửi...", khoá nút. Lưu lại HTML gốc trên chính element (data-original-html) để
+   * khôi phục nguyên vẹn (giữ cả icon mũi tên) khi xong, không cần biết trước nội dung nút.
+   */
+  function setButtonLoading(btn, loading) {
+    if (!btn) return;
+    if (loading) {
+      if (!btn.hasAttribute('data-original-html')) {
+        btn.setAttribute('data-original-html', btn.innerHTML);
+      }
+      btn.disabled = true;
+      btn.classList.add('is-loading');
+      btn.innerHTML = ICON_SPINNER + '<span>Đang gửi...</span>';
+    } else {
+      btn.disabled = false;
+      btn.classList.remove('is-loading');
+      var original = btn.getAttribute('data-original-html');
+      if (original !== null) btn.innerHTML = original;
+    }
+  }
+
   function send(payload) {
     return fetch(ENDPOINT, {
       method: 'POST',
@@ -131,8 +159,9 @@
         return;
       }
 
-      // Chặn bấm lại nhiều lần trong lúc chờ (~1-2s) — tránh tạo bản ghi trùng.
-      if (submitBtn) submitBtn.disabled = true;
+      // Chặn bấm lại nhiều lần trong lúc chờ (~1-2s) — tránh tạo bản ghi trùng — đồng thời
+      // báo cho khách biết yêu cầu đang được gửi (spinner + "Đang gửi...").
+      setButtonLoading(submitBtn, true);
 
       send(collected.payload)
         .then(function (res) {
@@ -144,8 +173,8 @@
           }
         })
         .finally(function () {
-          // finally: nút luôn được bật lại kể cả khi lỗi giữa chừng.
-          if (submitBtn) submitBtn.disabled = false;
+          // finally: nút luôn được khôi phục kể cả khi lỗi giữa chừng.
+          setButtonLoading(submitBtn, false);
         });
     });
   }

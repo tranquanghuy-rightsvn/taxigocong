@@ -719,6 +719,19 @@ body {
   cursor: not-allowed;
 }
 
+/* Trạng thái đang gửi của nút Đặt xe / Liên hệ (js/forms.js thêm class + spinner khi submit),
+   để khách biết yêu cầu đang được gửi chứ không phải web treo. */
+.btn-spinner {
+  animation: btn-spinner-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes btn-spinner-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Từ 3 ô lên 5 ô (thêm Họ tên + SĐT): phải đặt bề rộng TỐI THIỂU cho từng ô, nếu không
    flexbox sẽ bóp đều tất cả xuống ~90px và 2 ô địa chỉ không còn đọc được. Có min-width thì
    khi không đủ chỗ hàng sẽ TỰ XUỐNG DÒNG thay vì bóp nhỏ. */
@@ -1799,6 +1812,11 @@ body {
   background: #a5121e;
 }
 
+.contact-submit[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .contact-form-note {
   margin-top: 0.85rem;
   font-size: 0.85rem;
@@ -2778,6 +2796,16 @@ body {
   background: rgba(15, 18, 24, 0.55);
   opacity: 0;
   transition: opacity 0.18s ease;
+}
+
+/* QUAN TRỌNG: overlay dùng thuộc tính "hidden" (JS: overlay.hidden = true) để ẩn hẳn sau khi
+   đóng popup. Nhưng class .form-modal-overlay ở trên có "display: flex" với specificity CAO
+   HƠN rule ẩn ngầm định [hidden]{display:none} của trình duyệt, nên riêng "hidden" không đủ
+   sức ẩn — overlay vô hình (opacity 0) nhưng VẪN che kín toàn màn hình (position:fixed;
+   inset:0; z-index:9999) và chặn mọi click, kể cả logo. Đây là nguyên nhân site "bị đơ" sau
+   khi đặt xe/liên hệ xong. Rule dưới đây thắng specificity để [hidden] thật sự ẩn overlay. */
+.form-modal-overlay[hidden] {
+  display: none;
 }
 
 .form-modal-overlay.is-open {
