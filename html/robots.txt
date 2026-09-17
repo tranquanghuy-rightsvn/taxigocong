@@ -1,0 +1,36 @@
+# robots.txt - https://taxigocongdongthap.com
+# Cho phép mọi bot thu thập toàn bộ nội dung, kể cả CSS/JS
+# (bot cần CSS/JS để render trang đúng như người dùng thấy).
+
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI / answer-engine crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://taxigocongdongthap.com/sitemap.xml

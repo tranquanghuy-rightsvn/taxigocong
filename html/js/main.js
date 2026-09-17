@@ -111,16 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
     qbDateTime.min = localNow;
   }
 
-  const contactForm = document.querySelector('.contact-form');
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const note = contactForm.querySelector('[data-form-note]');
-      if (note) {
-        note.textContent = 'Cảm ơn bạn! Chúng tôi sẽ liên hệ lại sớm nhất có thể.';
-      }
-      contactForm.reset();
-    });
-  }
+  // Việc gửi form Liên hệ/Đặt xe nằm ở js/forms.js (gửi thật lên backend).
+  // Trước đây chỗ này chỉ hiện lời cảm ơn rồi reset form - dữ liệu KHÔNG đi đâu cả.
 });

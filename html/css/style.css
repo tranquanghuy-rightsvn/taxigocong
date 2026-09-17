@@ -577,43 +577,6 @@ body {
   );
 }
 
-.qb-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
-}
-
-.qb-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.qb-brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.35;
-  white-space: nowrap;
-}
-
-.qb-brand-text strong {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--color-dark);
-}
-
-.qb-brand-text span {
-  font-size: 0.75rem;
-  color: #888;
-}
-
 .qb-locations {
   display: flex;
   align-items: center;
@@ -738,14 +701,64 @@ body {
   text-decoration: none;
   font-weight: 700;
   font-size: 0.95rem;
+  font-family: inherit;
   white-space: nowrap;
   padding: 0.7rem 1.5rem;
+  border: 0;
   border-radius: 50px;
+  cursor: pointer;
   transition: background 0.2s ease;
 }
 
 .qb-cta:hover {
   background: #a5121e;
+}
+
+.qb-cta[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Từ 3 ô lên 5 ô (thêm Họ tên + SĐT): phải đặt bề rộng TỐI THIỂU cho từng ô, nếu không
+   flexbox sẽ bóp đều tất cả xuống ~90px và 2 ô địa chỉ không còn đọc được. Có min-width thì
+   khi không đủ chỗ hàng sẽ TỰ XUỐNG DÒNG thay vì bóp nhỏ. */
+.qb-locations {
+  flex-wrap: wrap;
+  row-gap: 1rem;
+}
+
+.qb-field {
+  flex: 1 1 168px;
+  min-width: 168px;
+}
+
+/* Họ tên / SĐT cần ít chỗ hơn 2 ô địa chỉ. */
+.qb-field--sm {
+  flex: 0 1 146px;
+  min-width: 146px;
+}
+
+/* Gạch phân cách giữa các ô: ẩn đi khi hàng đã xuống dòng, vì lúc đó nó nằm lơ lửng giữa 2
+   hàng trông rất lạ. Chỉ giữ ở màn hình đủ rộng để 5 ô nằm trọn 1 hàng. */
+@media (max-width: 1500px) {
+  .qb-locations > .qb-divider {
+    display: none;
+  }
+}
+
+/* Ô bẫy bot (honeypot) - PHẢI luôn ẩn với người thật.
+   ⚠️ Mất rule này = form hỏng IM LẶNG: khách thật (hoặc autofill của trình duyệt) điền vào ô
+   hiện ra, server coi là bot và âm thầm bỏ qua, vẫn trả về thành công. Mất khách mà không ai
+   biết, không log, không lỗi. Sau mọi lần sửa/merge file CSS này phải kiểm lại:
+     curl -s https://taxigocongdongthap.com/css/style.css | grep -c hp-field   # phải khác 0 */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* Tablet gap (769-1273px): mobile menu is active here too (see 1273px query
@@ -786,10 +799,6 @@ body {
   .quick-booking {
     flex-wrap: wrap;
     row-gap: 1rem;
-  }
-
-  .qb-brand-text {
-    display: none;
   }
 
   .qb-divider {
@@ -884,14 +893,6 @@ body {
   }
 
   .qb-divider {
-    display: none;
-  }
-
-  .qb-brand {
-    width: 100%;
-  }
-
-  .qb-brand-text {
     display: none;
   }
 
@@ -2758,5 +2759,100 @@ body {
 
   .footer-nav {
     justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Popup kết quả gửi form (Đặt xe / Liên hệ)
+   Hiện giữa màn hình, PHẢI bấm OK mới tắt — không tự ẩn kiểu toast, để khách
+   không bỏ lỡ thông báo "đã nhận yêu cầu". Markup do js/forms.js tạo ra.
+   ========================================================================== */
+.form-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(15, 18, 24, 0.55);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.form-modal-overlay.is-open {
+  opacity: 1;
+}
+
+.form-modal {
+  width: min(400px, 100%);
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 1.75rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  transform: translateY(10px) scale(0.98);
+  transition: transform 0.18s ease;
+}
+
+.form-modal-overlay.is-open .form-modal {
+  transform: translateY(0) scale(1);
+}
+
+.form-modal-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-modal--success .form-modal-icon {
+  background: #e7f6ec;
+  color: #1a9c4c;
+}
+
+.form-modal--error .form-modal-icon {
+  background: #fdeced;
+  color: var(--color-primary);
+}
+
+.form-modal-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-dark);
+}
+
+.form-modal-text {
+  margin: 0 0 1.5rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+.form-modal-ok {
+  min-width: 130px;
+  padding: 0.7rem 1.75rem;
+  border: 0;
+  border-radius: 50px;
+  background: var(--color-primary);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.form-modal-ok:hover {
+  background: #a5121e;
+}
+
+@media (max-width: 480px) {
+  .form-modal {
+    padding: 1.75rem 1.25rem 1.25rem;
   }
 }

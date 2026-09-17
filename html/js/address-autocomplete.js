@@ -3,10 +3,10 @@
  * chung API Goong Maps autocomplete của xevipsanbay (api.xevipsanbay.com).
  *
  * QUAN TRỌNG: backend này giới hạn CORS chỉ cho phép origin
- * https://xevipsanbay.com gọi tới. Nếu taxigocong.com không nằm trong danh
+ * https://xevipsanbay.com gọi tới. Nếu taxigocongdongthap.com không nằm trong danh
  * sách origin được phép, mọi request ở đây sẽ bị trình duyệt chặn ở bước
  * preflight (lỗi CORS trong console, không phải lỗi code) — cần liên hệ bên
- * quản lý api.xevipsanbay.com để whitelist thêm domain taxigocong.com/
+ * quản lý api.xevipsanbay.com để whitelist thêm domain taxigocongdongthap.com/
  * localhost khi test.
  */
 (function () {
