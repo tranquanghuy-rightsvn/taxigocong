@@ -70,6 +70,13 @@ jobs:
             echo 'LỖI: mất rule CSS ẩn ô bẫy bot trong style.css'; exit 1; }
 
           # 3. Build 2 lần phải ra kết quả y hệt (idempotent).
+          # ⚠️ PHẢI `git add` kết quả build LẦN 1 trước khi build lần 2, để git index giữ
+          # đúng ảnh chụp lần 1 mà so sánh. Thiếu bước add này, `git diff` bên dưới lại so
+          # lần build 2 với html/ ĐÃ COMMIT TỪ TRƯỚC (tức là html/ ở trạng thái CŨ, chưa có
+          # thay đổi data/ lần này) — nên hễ có nội dung mới thật sự (vd: thêm bài viết) là
+          # diff luôn khác 0 và bị báo nhầm "non-idempotent" dù build hoàn toàn đúng. Bug thật
+          # đã gặp: bài CMS đầu tiên qua pipeline này bị chặn deploy vì lỗi này.
+          git add -A -- html/
           python3 scripts/build.py >/dev/null && python3 scripts/build-seo.py >/dev/null
           git diff --quiet -- html/ || {
             echo 'LỖI: build lần 2 ra kết quả khác lần 1'; git diff --stat -- html/; exit 1; }
