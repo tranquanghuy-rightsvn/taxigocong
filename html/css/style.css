@@ -2884,3 +2884,170 @@ body {
     padding: 1.75rem 1.25rem 1.25rem;
   }
 }
+
+/* ==========================================================================
+   Nút liên hệ nổi — Gọi ngay / Chat Zalo
+   Desktop: 2 nút tròn xếp dọc, dính góc phải dưới màn hình.
+   <= 768px: gập thành thanh full-width dính ĐÁY màn hình (ngón cái dễ với tới),
+   kèm padding-bottom cho <body> để thanh không che mất cuối footer.
+   Logo Zalo dùng ẢNH /assets/images/zalo.png cho đúng nhận diện Zalo (giống nút
+   bên dự án web100) thay vì vẽ lại bong bóng chat bằng CSS.
+   z-index 900 là CỐ Ý thấp hơn menu mobile (drawer 1001 / overlay 1000) và popup
+   form (9999) — mở menu hay popup thì nút nổi không được đè lên trên.
+   ========================================================================== */
+.contact-float {
+  position: fixed;
+  right: 20px;
+  bottom: 22px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.contact-float-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+}
+
+.contact-float-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  transition: transform 0.2s ease;
+}
+
+.contact-float-btn:hover .contact-float-icon {
+  transform: scale(1.08);
+}
+
+.contact-float-phone .contact-float-icon {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* Hai vòng sóng toả ra quanh nút gọi (vòng thứ hai lệch pha nửa nhịp) để mắt
+   khách bị hút về hotline. */
+.contact-float-phone .contact-float-icon::before,
+.contact-float-phone .contact-float-icon::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  opacity: 0.55;
+  animation: contact-float-pulse 1.8s ease-out infinite;
+}
+
+.contact-float-phone .contact-float-icon::after {
+  animation-delay: 0.9s;
+}
+
+@keyframes contact-float-pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.55;
+  }
+
+  70% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.contact-float-zalo .contact-float-icon {
+  background: #fff url("../assets/images/zalo.png") center / cover no-repeat;
+}
+
+/* Chữ chỉ xuất hiện khi 2 nút gập thành thanh đáy ở mobile. */
+.contact-float-label {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .contact-float {
+    right: 0;
+    left: 0;
+    bottom: 0;
+    flex-direction: row;
+    gap: 0;
+  }
+
+  .contact-float-btn {
+    flex: 1;
+    gap: 0.5rem;
+    padding: 0.65rem 0.5rem calc(0.65rem + env(safe-area-inset-bottom, 0px));
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  /* Trên thanh đáy, Zalo đứng TRƯỚC (trái) — đảo bằng order để HTML vẫn giữ
+     nút gọi ở trên cùng khi xếp dọc ở desktop. */
+  .contact-float-zalo {
+    order: 1;
+    background: #0068ff;
+  }
+
+  .contact-float-phone {
+    order: 2;
+    background: var(--color-primary);
+  }
+
+  .contact-float-icon {
+    width: 26px;
+    height: 26px;
+    box-shadow: none;
+  }
+
+  /* Nền logo Zalo cũng màu xanh nên đặt trên nền xanh của thanh sẽ bị lẫn —
+     viền trắng mỏng tách nó ra thành một huy hiệu rõ ràng. */
+  .contact-float-zalo .contact-float-icon {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
+  }
+
+  .contact-float-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Vòng sóng giữ nguyên ở thanh đáy, chỉ thu nhỏ cho vừa và đổi sang viền
+     trắng — viền đỏ đặt trên nền đỏ của thanh thì không nhìn thấy gì. */
+  .contact-float-phone .contact-float-icon::before,
+  .contact-float-phone .contact-float-icon::after {
+    inset: -4px;
+    border-color: rgba(255, 255, 255, 0.95);
+  }
+
+  .contact-float-btn:hover .contact-float-icon {
+    transform: none;
+  }
+
+  .contact-float-label {
+    display: inline;
+  }
+
+  body {
+    padding-bottom: calc(52px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-float-phone .contact-float-icon::before,
+  .contact-float-phone .contact-float-icon::after {
+    animation: none;
+  }
+}
