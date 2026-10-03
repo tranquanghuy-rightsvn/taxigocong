@@ -511,6 +511,13 @@ def website_node():
         "name": BRAND,
         "description": "Dịch vụ taxi uy tín tại Gò Công, Tiền Giang, Đồng Tháp - đặt xe nhanh 24/7.",
         "publisher": {"@id": SITE + "/#organization"},
+        # Đơn vị thiết kế website — khớp với dòng "Website được tạo bởi Web100.vn" ở footer.
+        "creator": {
+            "@type": "Organization",
+            "@id": "https://web100.vn/#organization",
+            "name": "Web100",
+            "url": "https://web100.vn/",
+        },
         "inLanguage": "vi-VN",
     }
 

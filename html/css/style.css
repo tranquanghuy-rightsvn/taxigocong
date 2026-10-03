@@ -3051,3 +3051,8 @@ body {
     animation: none;
   }
 }
+
+.footer-copy a {
+  color: #fff;
+  text-decoration: underline;
+}
