@@ -1104,8 +1104,13 @@ def write_sitemap():
     print("wrote  sitemap.xml (%d urls)" % len(rows))
 
 
-# Trang cố ý KHÔNG nằm trong pipeline SEO: có <head> riêng, noindex, không vào sitemap.
-SEO_EXCLUDED = {"admin/index.html"}
+# Trang cố ý KHÔNG nằm trong pipeline SEO: có <head> riêng, không vào sitemap.
+SEO_EXCLUDED = {
+    "admin/index.html",
+    # Landing page chạy quảng cáo, copy nguyên từ site taxi-gocong (hotline riêng 0703.358.538):
+    # giữ <head> riêng, noindex (meta + _headers), không vào sitemap.
+    "lp/xe-hop-dong-go-cong/index.html",
+}
 
 
 def check_coverage():

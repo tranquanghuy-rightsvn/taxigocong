@@ -12,3 +12,7 @@
 /admin
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet, noimageindex
   Referrer-Policy: no-referrer
+
+# Landing page chạy quảng cáo: không lập chỉ mục (vẫn để bot đọc được để Google Ads duyệt trang).
+/lp/*
+  X-Robots-Tag: noindex, follow
